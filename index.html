@@ -7,27 +7,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <span id="message" class="message"></span>
     <div class="main-game flex-row">
       <div class="side-bar flex-column">
         <div class="menu">
           <div class="section-title">
-            <img src="/icons/menu.png" />
+            <img src="./icons/menu.png" />
             <span>Menu</span>
           </div>
           <ul>
-            <li id="overall">
-              <svg xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                  stroke="#b1b1b1"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <span>Overall</span>
-            </li>
-            <li id="add-project">
+            <li id="add-project" class="menu-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="800px"
@@ -68,7 +57,7 @@
               </svg>
               <span>Add Project</span>
             </li>
-            <li id="add-task">
+            <li id="add-task" class="menu-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="800px"
@@ -109,7 +98,18 @@
               </svg>
               <span>Add Task</span>
             </li>
-            <li id="all-task">
+            <li id="overall" class="menu-item" style="background-color: black">
+              <svg xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                  stroke-width="1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <span>Overall</span>
+            </li>
+            <li id="all-task" class="menu-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 35 24"
@@ -130,7 +130,7 @@
               </svg>
               <span>All Tasks</span>
             </li>
-            <li id="task-compleated">
+            <li id="task-compleated" class="menu-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 35 24"
@@ -149,17 +149,17 @@
         </div>
         <div class="analisys">
           <div class="section-title">
-            <img src="/icons/graph.png" />
+            <img src="./icons/graph.png" />
             <span>Analisys</span>
           </div>
         </div>
       </div>
 
       <div class="panel flex-column">
-        <div class="section-title">
-          <span id="page-title">Overall</span>
-        </div>
-        <div class="panel-page" id="overall">
+        <div class="panel-page" id="overall-page">
+          <div class="section-title">
+            <span id="page-title">Overall</span>
+          </div>
           <div class="project-section-title">
             <h2>Project</h2>
             <div id="navigation-btn">
@@ -169,112 +169,91 @@
           </div>
           <div class="projects">
             <div class="track">
-              <div class="project">
+              <!-- <div class="project">
                 <div class="theme color-green"></div>
                 <div class="icon flex-row">
                   <img src="/icons/graph.png" />
                 </div>
-                <h4 id="project-title">Learning JS</h4>
-                <p id="project-dis">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <h5>Tasks</h5>
-                <div class="tasks-carousel flex-row">
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <span id="task-title-carousel">doing hello world...</span>
+                <div class="project-card-content">
+                  <div>
+                    <h4 id="project-title">Learning JS</h4>
+                    <p class="project-des">Lorem ipsum dolor sit am</p>
+                  </div>
+                  <div>
+                    <h5>Tasks</h5>
+                    <div class="tasks-carousel flex-row">
+                      <div class="task-title-carousel"></div>
+                      <span>Lorem ipsum dolor</span>
+                      <span>doing hello world...</span>
+                      <div class="overlay"></div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <div class="project-demo-view">
+                <div class="theme color-gray"></div>
+                <div class="icon flex-row"></div>
+                <div class="title-demo"></div>
+                <div class="dis-demo"></div>
+                <div class="dis-demo2"></div>
+                <div class="title-demo2"></div>
+                <div class="tasks-carousel-demo flex-row">
+                  <span class="task-title-carousel"> </span>
+                  <span class="task-title-carousel2"></span>
                   <div class="overlay"></div>
                 </div>
               </div>
-              <div class="project">
-                <div class="theme color-yellow"></div>
-                <div class="icon flex-row">
-                  <img src="/icons/graph.png" />
-                </div>
-                <h4 id="project-title">Learning JS</h4>
-                <p id="project-dis">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <h5>Tasks</h5>
-                <div class="tasks-carousel flex-row">
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <div class="overlay"></div>
-                </div>
-              </div>
-              <div class="project">
-                <div class="theme color-orange"></div>
-                <div class="icon flex-row">
-                  <img src="/icons/graph.png" />
-                </div>
-                <h4 id="project-title">Learning JS</h4>
-                <p id="project-dis">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <h5>Tasks</h5>
-                <div class="tasks-carousel flex-row">
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <div class="overlay"></div>
-                </div>
-              </div>
-              <div class="project">
-                <div class="theme color-blue"></div>
-                <div class="icon flex-row">
-                  <img src="/icons/graph.png" />
-                </div>
-                <h4 id="project-title">Learning JS</h4>
-                <p id="project-dis">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <h5>Tasks</h5>
-                <div class="tasks-carousel flex-row">
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <div class="overlay"></div>
-                </div>
-              </div>
-              <div class="project">
-                <div class="theme color-green"></div>
-                <div class="icon flex-row">
-                  <img src="/icons/graph.png" />
-                </div>
-                <h4 id="project-title">Learning JS</h4>
-                <p id="project-dis">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <h5>Tasks</h5>
-                <div class="tasks-carousel flex-row">
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <div class="overlay"></div>
-                </div>
-              </div>
-              <div class="project">
-                <div class="theme color-pink"></div>
-                <div class="icon flex-row">
-                  <img src="/icons/graph.png" />
-                </div>
-                <h4 id="project-title">Learning JS</h4>
-                <p id="project-dis">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <h5>Tasks</h5>
-                <div class="tasks-carousel flex-row">
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <span id="task-title-carousel">doing hello world...</span>
-                  <div class="overlay"></div>
-                </div>
-              </div>
+              <button
+                class="add-project-big flex-column"
+                id="add-project-in-overall-page"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="70px"
+                  height="70px"
+                  viewBox="11.5 0 1 24"
+                >
+                  <title />
+
+                  <g id="Complete">
+                    <g data-name="add" id="add-2">
+                      <g>
+                        <line
+                          fill="none"
+                          stroke="#676767"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1"
+                          x1="12"
+                          x2="12"
+                          y1="23"
+                          y2="1"
+                        />
+
+                        <line
+                          fill="none"
+                          stroke="#676767"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1"
+                          x1="1"
+                          x2="23"
+                          y1="12"
+                          y2="12"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <span>
+                  There Is No Project <br />
+                  Added Yet
+                </span>
+              </button>
             </div>
           </div>
           <h2>Task</h2>
-          <div class="table-container">
+          <div class="table-container" id="overall-page-task-table">
             <table>
               <thead>
                 <tr>
@@ -283,33 +262,956 @@
                   <th>Start</th>
                   <th>End</th>
                   <th>Importance</th>
-                  <th>This Week</th>
+                  <th>Status</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
+              <tbody class="task-table-body">
+                <tr class="message-demo">
                   <td>
-                    <span class="task-dot green" id="task-dot"></span>
-                    <span id="task-title-table">
+                    <span>There Is No Task Added Yet</span>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>
+                    <span class="task-dot green"></span>
+                    <span class="task-title-table">
                       Lorem ipsum dolor sit amet
                     </span>
                   </td>
                   <td>
-                    <span id="project-title-table">Lorem ipsum dolor</span>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
                   </td>
                   <td>
-                    <span id="start-date-table">25/2/10</span>
+                    <span class="start-date-table">25/2/10</span>
                   </td>
                   <td>
-                    <span id="end-start-table">25/2/10</span>
+                    <span class="end-start-table">25/2/10</span>
                   </td>
                   <td class="importantcy">
-                    <span id="task-importance-table">Important</span>
+                    <span class="task-importance-table">Important</span>
                   </td>
                   <td class="table-row-done-btn">
                     <span class="checkmark">✔</span>
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot yellow"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot orange"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot pink"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot blue"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+          <button class="add-task-btn flex-row" id="add-task-in-overall-page">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10px"
+              height="10px"
+              viewBox="11.5 0 1 24"
+            >
+              <title />
+
+              <g id="Complete">
+                <g data-name="add" id="add-2">
+                  <g>
+                    <line
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      x1="12"
+                      x2="12"
+                      y1="23"
+                      y2="1"
+                    />
+
+                    <line
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      x1="1"
+                      x2="23"
+                      y1="12"
+                      y2="12"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+            Add Task
+          </button>
+        </div>
+        <div class="panel-page display-none" id="add-project-page">
+          <div class="section-title">
+            <span id="page-title">Add New Project</span>
+          </div>
+          <form class="form" id="add-project-form">
+            <div class="row">
+              <div class="field">
+                <label for="project-title-input">Project Title</label>
+                <input
+                  type="text"
+                  id="project-title-input"
+                  name="project-title-input"
+                  placeholder="Title ..."
+                  autocomplete="off"
+                />
+              </div>
+              <div class="field">
+                <label for="projectColor">Project Color</label>
+                <div class="color-group">
+                  <label class="color-option">
+                    <input
+                      type="radio"
+                      name="projectColor"
+                      value="rgb(34, 255, 0)"
+                    />
+                    <span
+                      class="color-circle"
+                      style="background: rgb(34, 255, 0)"
+                    ></span>
+                  </label>
+
+                  <label class="color-option">
+                    <input type="radio" name="projectColor" value="#ff9800" />
+                    <span
+                      class="color-circle"
+                      style="background: #ff9800"
+                    ></span>
+                  </label>
+
+                  <label class="color-option">
+                    <input type="radio" name="projectColor" value="#ffeb3b" />
+                    <span
+                      class="color-circle"
+                      style="background: #ffeb3b"
+                    ></span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="projectColor" value="#2bddf1" />
+                    <span
+                      class="color-circle"
+                      style="background: #2bddf1"
+                    ></span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="projectColor" value="#f52257" />
+                    <span
+                      class="color-circle"
+                      style="background: #f52257"
+                    ></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="flex-wrap: wrap">
+              <div class="field" style="min-width: 100%">
+                <label for="project-dis-input" style="margin-top: 15px"
+                  >Project Discription</label
+                >
+                <textarea
+                  name="project-dis-input"
+                  id="project-dis-input"
+                  placeholder="Discription..."
+                ></textarea>
+              </div>
+              <div class="filed" style="width: 65%">
+                <label for="projectIcon" style="margin-top: 0px"
+                  >Project Icon</label
+                >
+                <div class="icon-group flex-row">
+                  <div class="icon-container flex-row">
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/book.png"
+                      />
+                      <img src="icons/book.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/laptop.png"
+                      />
+                      <img src="icons/laptop.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/javascript.png"
+                      />
+                      <img src="icons/javascript.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/python.png"
+                      />
+                      <img src="icons/python.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/php.png"
+                      />
+                      <img src="icons/php.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/c.png"
+                      />
+                      <img src="icons/c.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/c++.png"
+                      />
+                      <img src="icons/c++.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/ruby.png"
+                      />
+                      <img src="icons/ruby.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/pi.png"
+                      />
+                      <img src="icons/pi.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/earth.png"
+                      />
+                      <img src="icons/earth.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/volleyball.png"
+                      />
+                      <img src="icons/volleyball.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/soccer-ball.png"
+                      />
+                      <img src="icons/soccer-ball.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/basketball.png"
+                      />
+                      <img src="icons/basketball.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/rugby.png"
+                      />
+                      <img src="icons/rugby.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/instagram.png"
+                      />
+                      <img src="icons/instagram.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/linkedin.png"
+                      />
+                      <img src="icons/linkedin.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/facebook.png"
+                      />
+                      <img src="icons/facebook.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/youtube.png"
+                      />
+                      <img src="icons/youtube.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/tiktok.png"
+                      />
+                      <img src="icons/tiktok.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/dollar.png"
+                      />
+                      <img src="icons/dollar.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/euro.png"
+                      />
+                      <img src="icons/euro.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/pound.png"
+                      />
+                      <img src="icons/pound.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/ruble.png"
+                      />
+                      <img src="icons/ruble.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/rupee.png"
+                      />
+                      <img src="icons/rupee.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/peso.png"
+                      />
+                      <img src="icons/peso.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/rial.png"
+                      />
+                      <img src="icons/rial.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/bitcoin.png"
+                      />
+                      <img src="icons/bitcoin.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/ethereum.png"
+                      />
+                      <img src="icons/ethereum.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/tehter.png"
+                      />
+                      <img src="icons/tehter.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/binance.png"
+                      />
+                      <img src="icons/binance.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/usa.png"
+                      />
+                      <img src="icons/usa.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/iran.png"
+                      />
+                      <img src="icons/iran.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/canada.png"
+                      />
+                      <img src="icons/canada.png" class="project-icon" />
+                    </label>
+                    <label class="icon-option">
+                      <input
+                        type="radio"
+                        name="projectIcon"
+                        value="icons/china.png"
+                      />
+                      <img src="icons/china.png" class="project-icon" />
+                    </label>
+                  </div>
+                  <div class="selected-icon flex-row">
+                    <img
+                      src="icons/select.tr.gif"
+                      id="selected-icon"
+                      style="filter: invert(1)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <button type="submit" class="add-project-task" id="add-project-btn">
+            Add Project
+          </button>
+        </div>
+        <div class="panel-page display-none" id="add-task-page">
+          <div class="section-title">
+            <span id="add-task-page-title">Add New Task</span>
+          </div>
+          <form class="form" id="add-task-form">
+            <div class="row">
+              <div class="field">
+                <label for="task-title-input">Task Title</label>
+                <input
+                  type="text"
+                  id="task-title-input"
+                  name="task-title-input"
+                  placeholder="Title ..."
+                  autocomplete="off"
+                />
+              </div>
+              <div class="field">
+                <label for="relatedProject">Related To</label>
+                <select
+                  name="relatedProject"
+                  id="relatedProject"
+                  class="relatedProject-input"
+                >
+                  <option value="demo">Choose A Project</option>
+                  <option value="General">General</option>
+                </select>
+              </div>
+            </div>
+
+            <label for="task-dis-input" style="margin-top: 15px"
+              >Task Discription</label
+            >
+            <textarea
+              name="task-dis-input"
+              id="task-des-input"
+              placeholder="Discription..."
+            ></textarea>
+            <div class="row" style="margin-top: 20px">
+              <div class="field">
+                <label for="start-date">Start Date</label>
+                <input
+                  type="date"
+                  name="start-date"
+                  id="start-date"
+                  class="date-input"
+                />
+              </div>
+              <div class="field">
+                <label for="end-date">End Date</label>
+                <input
+                  type="date"
+                  name="start-date"
+                  id="end-date"
+                  class="date-input"
+                />
+              </div>
+            </div>
+            <label for="relatedProject" style="margin-top: 15px"
+              >Importance</label
+            >
+            <select
+              name="Importance-input"
+              id="Importance-input"
+              class="Importance-input"
+            >
+              <option value="demo">Choose Importance</option>
+              <option value="notImportant">Not Important</option>
+              <option value="important">Important</option>
+              <option value="veryImportant">Very Important</option>
+            </select>
+          </form>
+          <button type="submit" class="add-project-task" id="add-task-btn">
+            Add Task
+          </button>
+        </div>
+        <div class="panel-page project-page display-none" id="project-page">
+          <div class="section-title">
+            <span id="page-title"></span>
+          </div>
+          <div class="project-page-banner"></div>
+          <div class="project-page-icon flex-row">
+            <img src="icons/earth.png" />
+          </div>
+          <h2 id="project-page-title">Learning JS</h2>
+          <p id="project-page-des">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+          <div
+            class="table-container"
+            id="project-page-task-table"
+            style="margin-top: 15px"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Project</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Importance</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="message-demo">
+                  <td>
+                    <span>There Is No Task Added Yet</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button class="prev-page" id="prev-page"><</button>
+          <button class="delete-project" id="delete-project-1">Delete</button>
+          <div class="delete-project-container flex-row">
+            <span id="delete-project-message"
+              >Are You Sure You Want To Delete This Project</span
+            >
+            <button class="delete-project-2" id="delete-project-2">
+              Delete
+            </button>
+            <button class="delete-project-2" id="cancel-delete">Cancel</button>
+          </div>
+        </div>
+        <div class="panel-page display-none" id="all-task-page">
+          <div class="section-title">
+            <span id="page-title">All Tasks</span>
+          </div>
+          <div
+            class="table-container"
+            id="all-task-page-task-table"
+            style="margin-top: 15px"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Project</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Importance</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="message-demo">
+                  <td>
+                    <span>There Is No Task Added Yet</span>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>
+                    <span class="task-dot green"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot yellow"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot orange"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot pink"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot blue"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel-page display-none" id="task-compleated-page">
+          <div class="section-title">
+            <span id="page-title">Task Compleated</span>
+          </div>
+          <div
+            class="table-container"
+            id="task-compleated-page-task-table"
+            style="margin-top: 15px"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Project</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Importance</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="message-demo">
+                  <td>
+                    <span>There Is No Task Added Yet</span>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <td>
+                    <span class="task-dot green"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot yellow"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot orange"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot pink"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span class="task-dot blue"></span>
+                    <span class="task-title-table">
+                      Lorem ipsum dolor sit amet
+                    </span>
+                  </td>
+                  <td>
+                    <span class="project-title-table">Lorem ipsum dolor</span>
+                  </td>
+                  <td>
+                    <span class="start-date-table">25/2/10</span>
+                  </td>
+                  <td>
+                    <span class="end-start-table">25/2/10</span>
+                  </td>
+                  <td class="importantcy">
+                    <span class="task-importance-table">Important</span>
+                  </td>
+                  <td class="table-row-done-btn">
+                    <span class="checkmark">✔</span>
+                  </td>
+                </tr> -->
               </tbody>
             </table>
           </div>

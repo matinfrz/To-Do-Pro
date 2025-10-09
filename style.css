@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Garet";
-  src: url("/font/Garet W05 Regular.woff2") format("woff2"),
-    url("/font/Garet W05 Regular.woff") format("woff");
+  src: url("./font/Garet W05 Regular.woff2") format("woff2"),
+    url("./font/Garet W05 Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -36,6 +36,8 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 0px 20px;
+  position: relative;
 }
 .flex-row {
   display: flex;
@@ -49,7 +51,20 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+.display-none {
+  display: none !important;
+}
+.message {
+  position: absolute;
+  color: var(--gray);
+  font-size: 12px;
+  z-index: 999;
+  top: -100px;
+  padding: 10px;
+  background-color: var(--dark-gray);
+  border: 1px solid var(--dark-gray-3);
+  border-radius: 10px;
+}
 .main-game {
   background-color: var(--dark-gray-2);
   width: 960px;
@@ -85,15 +100,37 @@ body {
   align-items: center;
   border-bottom: 2px solid var(--dark-gray-5);
   padding-left: 10px;
+  transition: background 0.15s ease;
+  position: relative;
+}
+.menu ul li:hover {
+  background-color: black;
+  cursor: pointer;
+}
+.menu ul li svg path,
+.menu ul li svg line {
+  stroke: #b1b1b1;
+  transition: 0.3s ease, fill 0.3s ease;
+}
+.menu ul li:hover svg path,
+.menu ul li:hover svg line {
+  stroke: #fff !important;
+  /* fill: #fff !important; */
+}
+.menu li:hover span {
+  color: #fff;
 }
 .menu ul li svg {
   height: 50%;
   width: 35px;
   fill: none;
+  z-index: 10;
 }
 .menu ul li span {
   color: var(--light-gray);
   font-size: 14px;
+  z-index: 10;
+  transition: 0.2s !important;
 }
 .analisys {
   width: 100%;
@@ -130,6 +167,7 @@ body {
   padding: 0px 20px;
   gap: 8px;
   box-shadow: 0px 2px 30px 0px #050505;
+  z-index: 100;
 }
 .section-title span {
   color: white;
@@ -208,6 +246,36 @@ body {
 }
 
 .project {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--dark-gray-4);
+  min-width: 32%;
+  max-width: 32%;
+  border-radius: 15px;
+  /* padding-bottom: 15px; */
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.project:hover {
+  background-color: #101010;
+  scale: 1 !important;
+}
+.hover-scale-effect {
+  transition: 0.2s ease;
+}
+.hover-scale-effect:hover .project {
+  scale: 0.98;
+}
+.project-card-content {
+  height: 122px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-demo-view {
   border: 1px solid var(--dark-gray-4);
   min-width: 32%;
   max-width: 32%;
@@ -215,9 +283,41 @@ body {
   padding-bottom: 15px;
   overflow: hidden;
 }
+.title-demo {
+  width: 70%;
+  margin: 8px 15px 5px 15px;
+  background-color: var(--gray);
+  height: 15px;
+  border-radius: 50px;
+}
+.dis-demo {
+  width: 75%;
+  margin: 11px 15px 5px 15px;
+  background-color: var(--dark-gray-4);
+  height: 6px;
+  border-radius: 50px;
+}
+.dis-demo2 {
+  width: 60%;
+  margin: 0px 15px 5px 15px;
+  background-color: var(--dark-gray-4);
+  height: 6px;
+  border-radius: 50px;
+}
+.title-demo2 {
+  width: 30%;
+  margin: 20px 15px 5px 15px;
+  background-color: var(--gray);
+  height: 15px;
+  border-radius: 50px;
+}
 .theme {
   width: 100%;
   height: 30px;
+  box-shadow: 0px 2px 30px 0px #050505;
+}
+.color-gray {
+  background-color: var(--gray-2);
 }
 .color-yellow {
   background-color: yellow;
@@ -257,34 +357,105 @@ h5 {
   overflow: hidden; /* اضافی‌ها رو مخفی کن */
   text-overflow: ellipsis;
 }
-.project p {
+.project .project-des {
+  font-size: 10px; /* اندازه فونت */
+  line-height: 12px; /* ارتفاع هر خط */
+  margin: 0; /* حذف margin پیش‌فرض */
+  padding: 0px 14px; /* بدون padding اضافی */
   color: var(--gray-2);
-  font-size: 10px;
-  padding: 0px 14px;
-  display: -webkit-box; /* لازمه برای multiline */
-  -webkit-line-clamp: 2; /* تعداد خطی که می‌خوای */
-  -webkit-box-orient: vertical; /* تعیین جهت نمایش */
-  overflow: hidden; /* بقیه متن مخفی بشه */
-  text-overflow: ellipsis; /* سه نقطه بذاره */
+  overflow: hidden; /* مخفی کردن هر چیزی که بیرون بره */
+  text-overflow: ellipsis; /* سه‌نقطه برای متن کوتاه شده */
+  display: block; /* block برای اطمینان از رفتار استاندارد */
+  word-wrap: break-word; /* شکستن متن طولانی */
 }
 .project h5 {
   margin-top: 5px;
 }
 .tasks-carousel {
   width: 83%;
-  margin-left: 14px;
+  margin-left: 10px;
   justify-content: flex-start;
   gap: 5px;
   overflow: hidden;
   position: relative;
 }
+.task-title-carousel {
+  display: flex;
+  gap: 4px !important;
+  width: 100%;
+}
+
 .tasks-carousel span {
   background-color: var(--dark-gray-4);
   color: var(--light-gray);
   border-radius: 50px;
   padding: 4px 8px;
   font-size: 8px;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  display: inline-block; /* یا block بسته به layout */
+  max-width: 25ch; /* حدوداً 4 کلمه (4 * ~10ch) — تنظیم کن تا مناسب شود */
+  white-space: nowrap; /* جلوگیری از شکست خط */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* min-width: 30px; */
+  box-sizing: border-box !important;
+}
+.tasks-carousel-demo {
+  width: 83%;
+  margin-left: 14px;
+  justify-content: flex-start;
+  gap: 5px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 8px;
+  position: relative;
+}
+.tasks-carousel-demo span {
+  background-color: var(--dark-gray-4);
+  color: var(--light-gray);
+  border-radius: 50px;
+  padding: 4px 8px;
+  font-size: 8px;
+  white-space: nowrap !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* فقط 1 خط نمایش داده میشه */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  min-width: 100px; /* عرض دلخواه */
+  height: 17px;
+}
+.tasks-carousel-demo .overlay {
+  position: absolute;
+  width: 109%;
+  height: 110%;
+  margin-left: 10px;
+  background: linear-gradient(to left, var(--dark-gray) 10%, transparent 50%);
+  top: 0;
+  left: 0;
+}
+.add-project-big {
+  width: 33%;
+  background-color: transparent;
+  border: 3px dashed var(--dark-gray-4);
+  border-radius: 20px;
+  gap: 15px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.add-project-big span {
+  color: var(--gray);
+  font-size: 10px;
+  line-height: 18px;
+}
+.add-project-big svg line {
+  stroke: var(--gray);
+  transition: stroke 0.2s;
+}
+.add-project-big:hover svg line {
+  stroke: var(--gray-2) !important;
 }
 .tasks-carousel .overlay {
   position: absolute;
@@ -304,6 +475,20 @@ h5 {
   border-radius: 10px 10px 10px 10px;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
+  max-height: 200px;
+  min-height: 50px;
+}
+.overflow-fix {
+  animation: overflow 10s ease;
+}
+@keyframes overflow {
+  from {
+    overflow: hidden;
+  }
+  to {
+    overflow-y: auto;
+  }
 }
 /* کانتینر جدول یا هر المان اسکرول دار */
 .table-container::-webkit-scrollbar {
@@ -329,6 +514,7 @@ h5 {
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 thead {
@@ -338,6 +524,21 @@ thead {
   z-index: 100;
   box-shadow: 0px 2px 30px 0px #050505;
 }
+thead th:first-child {
+  width: 30%;
+}
+thead th:nth-child(2) {
+  width: 13%;
+}
+thead th:nth-child(3) {
+  width: 15%;
+}
+thead th:nth-child(4) {
+  width: 15%;
+}
+thead th:nth-child(5) {
+  width: 17%;
+}
 
 thead th {
   text-align: left;
@@ -346,11 +547,17 @@ thead th {
   font-size: 14px;
   color: #aaa;
 }
+tbody tr {
+  border-top: 1px solid #333;
+  transition: 0.1s;
+  /* cursor: pointer; */
+}
+tbody tr:hover {
+  background-color: #151515;
+}
 tbody td {
   padding: 14px 16px;
   font-size: 14px;
-  /* border-bottom: 1px solid #333; */
-  border-top: 1px solid #333;
 }
 
 /* رنگ دایره کنار Task */
@@ -399,11 +606,12 @@ tbody td {
   transition: background 0.3s ease;
 }
 .checkmark:hover {
-  background-color: var(--orange);
+  background-color: #fff;
+
   color: #000;
 }
 
-.checkmark::after {
+/* .checkmark::after {
   content: "";
   position: absolute;
   left: 4px;
@@ -414,7 +622,7 @@ tbody td {
   border-width: 0 2px 2px 0;
   opacity: 0;
   transform: rotate(45deg);
-}
+} */
 
 .checkmark.checked {
   border-color: #4caf50;
@@ -446,7 +654,7 @@ tbody td {
   overflow: hidden; /* متن اضافی مخفی */
   text-overflow: ellipsis; /* سه نقطه */
 }
-#project-title-table {
+.project-title-table {
   display: -webkit-box;
   -webkit-line-clamp: 1; /* فقط 1 خط نمایش داده میشه */
   -webkit-box-orient: vertical;
@@ -465,7 +673,436 @@ tbody td {
 }
 .table-row-done-btn {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  justify-content: flex-start !important;
   padding-right: 12px !important;
+}
+.message-demo span {
+  color: var(--gray);
+  font-size: 10px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.message-demo {
+  background-color: transparent;
+  cursor: default !important;
+}
+.message-demo:hover {
+  background-color: transparent !important;
+}
+.add-task-btn {
+  background-color: var(--dark-gray-2);
+  border: none;
+  padding: 5px 12px 5px 10px;
+  border-radius: 50px;
+  font-size: 9px;
+  gap: 5px;
+  font-weight: 500;
+  margin-left: 5px;
+  color: var(--gray);
+  cursor: pointer;
+  transition: 0.1s ease !important;
+}
+.add-task-btn svg {
+  width: 8px;
+  height: 8px;
+  margin-top: 0px;
+  transition: 0.5s ease;
+}
+.add-task-btn svg line {
+  stroke: black;
+}
+.add-task-btn:hover {
+  background-color: black;
+  color: var(--light-gray);
+}
+/* .add-task-btn:hover svg line {
+  stroke: var(--light-gray) !important;
+} */
+.add-task-btn:active {
+  scale: 0.97;
+}
+.add-task-btn-change-color {
+  background-color: var(--dark-gray-3) !important;
+  color: var(--gray) !important;
+}
+.add-task-btn:hover svg {
+  transform: rotateZ(180deg) !important;
+}
+.add-task-btn-change-color:hover svg {
+  transform: rotateZ(180deg) !important;
+}
+.add-task-btn-change-color svg line {
+  stroke: var(--gray) !important;
+}
+.add-task-btn-change-color:hover svg line {
+  stroke: var(--gray) !important;
+}
+#overall-page .add-task-btn {
+  background-color: var(--orange);
+  border: none;
+  padding: 4px 12px 4px 10px;
+  border-radius: 50px;
+  font-size: 9px;
+  gap: 5px;
+  font-weight: 500;
+  margin-left: 5px;
+  color: var(--black);
+  cursor: pointer;
+  transition: 0.1s ease !important;
+}
+#overall-page .add-task-btn svg {
+  width: 10px;
+  height: 10px;
+  margin-top: -1px;
+}
+#overall-page .add-task-btn svg line {
+  stroke: var(--black);
+}
+/* #overall-page .add-task-btn:hover svg line {
+  stroke: black !important;
+} */
+#add-project-page {
+  padding-bottom: 64px !important;
+}
+
+.form {
+  width: 100%;
+  /* padding: 0px 15px; */
+}
+.form .row {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+}
+.form .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form label {
+  margin-bottom: 5px;
+  color: var(--light-gray);
+  font-size: 15px;
+  font-weight: 400;
+  display: block;
+}
+.row .field {
+  flex: 1; /* هرکدوم نصف ردیف بشن */
+}
+.form input[type="text"] {
+  margin-top: 8px;
+  background-color: var(--dark-gray-2);
+  border-radius: 10px;
+  border: 1px solid var(--dark-gray-4);
+  width: 70%;
+  padding: 8px 15px;
+  color: var(--light-gray);
+  transition: 0.2s ease;
+}
+.form input[type="text"]:focus {
+  outline: none;
+  background-color: var(--dark-gray);
+}
+.form input[type="text"]::placeholder {
+  color: var(--gray);
+  font-size: 12px;
+}
+.form input[type="text"]:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px var(--dark-gray) inset; /* رنگ زمینه دلخواهت */
+  -webkit-text-fill-color: #b1b1b1; /* رنگ متن */
+}
+
+/* Firefox */
+.form input[type="text"]:-moz-autofill {
+  box-shadow: 0 0 0px 1000px #1e1e1e inset;
+  -moz-text-fill-color: #fff;
+}
+
+.color-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.color-option input[type="radio"] {
+  display: none;
+}
+
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: 0.2s !important;
+  opacity: 0.3 !important;
+}
+.color-circle:hover {
+  opacity: 1 !important;
+}
+
+.color-option input[type="radio"]:checked + .color-circle {
+  box-shadow: 0 0px 20px 2px rgba(0, 0, 0, 0.6);
+  width: 35px;
+  border-radius: 10px;
+  opacity: 1 !important;
+}
+
+.form textarea {
+  margin-top: 8px;
+  background-color: var(--dark-gray-2);
+  border-radius: 10px;
+  border: 1px solid var(--dark-gray-4);
+  width: 70%;
+  padding: 8px 15px;
+  color: var(--light-gray);
+  transition: 0.2s ease;
+  width: 100%;
+  height: 80px;
+  resize: none;
+}
+.form textarea:focus {
+  outline: none;
+  background-color: var(--dark-gray);
+}
+textarea::-webkit-scrollbar {
+  width: 5px; /* عرض اسکرول‌بار عمودی */
+  height: 10px; /* ارتفاع اسکرول‌بار افقی */
+  margin-right: 50px !important;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #000000; /* رنگ پس‌زمینه‌ی ریل */
+  border-radius: 20px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: var(--dark-gray-4); /* رنگ خود اسکرول */
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #000; /* رنگ وقتی موس روشه */
+}
+
+.icon-group {
+  height: 150px;
+  min-width: 100%;
+  background-color: var(--dark-gray-2);
+  border-radius: 10px;
+  border: 1px solid var(--dark-gray-4);
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 12px;
+  overflow: hidden;
+}
+.icon-container {
+  height: 100%;
+  width: 70%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  flex-wrap: wrap;
+}
+.project-icon {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.project-icon img {
+  width: 90%;
+  height: 90%;
+}
+.icon-group input[type="radio"] {
+  display: none;
+}
+.icon-group input[type="radio"]:checked + .project-icon {
+  opacity: 1;
+}
+.selected-icon {
+  width: 30%;
+  min-height: 100;
+  background-color: var(--dark-gray);
+}
+.selected-icon img {
+  width: 40%;
+}
+
+.add-project-task {
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+  background-color: var(--dark-gray-2);
+  color: var(--gray);
+  padding: 8px 15px;
+  font-weight: 500;
+  border: 1px solid var(--dark-gray-4);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.1s;
+  font-size: 12px;
+}
+.delete-project,
+.prev-page {
+  border-radius: 5px;
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+  background-color: var(--dark-gray-2);
+  color: var(--gray);
+  padding: 5px 10px;
+  font-weight: 500;
+  border: 1px solid var(--dark-gray-4);
+  cursor: pointer;
+  transition: 0.1s;
+  font-size: 12px;
+  z-index: 10;
+}
+.delete-project {
+  right: 60px;
+}
+.add-project-task:hover,
+.prev-page:hover,
+.delete-project:hover {
+  color: var(--light-gray);
+}
+.add-project-task:active,
+.prev-page:active,
+.delete-project:active {
+  scale: 0.97;
+}
+
+.relatedProject-input,
+.Importance-input {
+  width: 70%;
+  margin-top: 8px;
+  height: 100%;
+  background-color: var(--dark-gray-2);
+  border: 1px solid var(--dark-gray-4);
+  border-radius: 10px;
+  padding: 0px 5px;
+  color: var(--light-gray);
+  font-size: 12px;
+  outline: none;
+}
+.Importance-input {
+  width: 34%;
+  height: auto !important;
+  padding: 8px 8px;
+}
+.relatedProject-input:focus,
+.Importance-input:focus {
+  background-color: var(--dark-gray);
+}
+.relatedProject-input option,
+.Importance-input option {
+  background: #1a1a1a;
+  padding: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.relatedProject-input option:hover,
+.Importance-input option:hover {
+  background-color: var(--black);
+}
+.date-input {
+  width: 70%;
+  margin-top: 8px;
+  height: 100%;
+  background-color: var(--dark-gray-2);
+  border: 1px soloid var(--dark-gray-4) !important;
+  border-radius: 10px;
+  padding: 8px 15px;
+  color: var(--gray);
+  outline: none;
+  cursor: pointer;
+}
+.date-input:active {
+  border: 1px solid var(--dark-gray-4);
+}
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+#project-page {
+  padding-top: 160px;
+  padding-bottom: 70px;
+}
+#project-page .section-title {
+  box-shadow: 0px 0px 0px 0px transparent !important;
+}
+.project-page-banner {
+  width: 100%;
+  height: 120px;
+  background-color: #ffeb3b;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  box-shadow: 0px 20px 30px 10px #050505;
+}
+.project-page-icon {
+  width: 70px;
+  height: 70px;
+  background-color: var(--dark-gray-4);
+  border: 1px solid var(--gray);
+  border-radius: 50%;
+  position: absolute;
+  right: 25px;
+  top: 85px;
+  z-index: 111;
+  padding: 35px;
+}
+.project-page-icon img {
+  width: 40px;
+  height: 40px;
+}
+.project-page h2 {
+  font-size: 25px;
+  font-weight: 600;
+  padding-right: 50px;
+}
+.project-page p {
+  color: var(--light-gray);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.delete-project-container {
+  border: 1px solid var(--dark-gray-3);
+  border-radius: 10px;
+  background-color: var(--dark-gray-2);
+  padding: 15px;
+  gap: 5px;
+  position: absolute;
+  right: 20px;
+  bottom: -30%;
+  transition: transform 0.3s ease, opacity 0.4s ease;
+  z-index: 0;
+}
+.delete-project-container span {
+  font-size: 12px;
+  color: var(--gray);
+  margin-right: 10px;
+}
+.delete-project-container button {
+  border-radius: 5px;
+  background-color: var(--dark-gray-2);
+  color: var(--gray);
+  padding: 5px 10px;
+  font-weight: 500;
+  border: 1px solid var(--dark-gray-4);
+  cursor: pointer;
+  transition: 0.1s;
+  font-size: 12px;
 }
