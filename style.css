@@ -511,10 +511,6 @@ h5 {
   border: 1px solid #000;
 }
 
-.table-container::-webkit-scrollbar-thumb:hover {
-  background-color: #d178d1; /* رنگ وقتی موس روشه */
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
