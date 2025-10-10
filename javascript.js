@@ -169,6 +169,84 @@ let projects = [
     }
 ];
 
+// persistence
+const STORAGE_KEY = "todo_pro_state_v1";
+
+function saveState() {
+    try {
+        const state = {
+            projects,
+            tasks
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (err) {
+        console.error("Failed to save state", err);
+    }
+}
+
+function rebuildUIFromState() {
+    // clear existing project cards
+    const existingCards = document.querySelectorAll(".track .project");
+    existingCards.forEach(card => card.remove());
+
+    // reset select options beyond default (Choose, General)
+    const relatedProjectSelect = document.getElementById("relatedProject");
+    Array.from(relatedProjectSelect.options).slice(2).forEach(opt => opt.remove());
+
+    // reset counters and UI toggles
+    addProject.projectCount = 0;
+    projectCardDemo.style.display = "";
+    addProjectBtnInOverallPageText.innerHTML = `There Is No Project<br>Added Yet`;
+    addTaskBtnInOverallPage.classList.remove("add-task-btn-change-color");
+
+    // recreate project cards (skip General)
+    projects.filter(p => p.projectTitle !== "General").forEach(p => {
+        const ap = new addProject(
+            p.projectTitle,
+            p.projectDescription,
+            p.projectColor,
+            p.projectIcon,
+            p.projectTask || []
+        );
+        ap.createProjectCard();
+
+        const opt = document.createElement("option");
+        opt.value = p.projectTitle;
+        opt.textContent = p.projectTitle;
+        relatedProjectSelect.appendChild(opt);
+    });
+
+    // add click handlers to project cards
+    document.querySelectorAll(".project").forEach(projCard => {
+        projCard.addEventListener("click", () => openProjectPage(projCard));
+    });
+
+    // rebuild task tables
+    unfinishedTasks = tasks.filter(t => !t.done);
+    tasksDone = tasks.filter(t => t.done);
+    updateTable(unfinishedTasks, taskTableInOverallPage);
+    updateTable(tasks, taskTableInAllTaskPage);
+    updateTable(tasksDone, taskTableInTaskCompleatedPage);
+
+    // re-evaluate carousel controls
+    initializeCarousel();
+}
+
+function loadState() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.projects) && Array.isArray(parsed.tasks)) {
+            projects = parsed.projects;
+            tasks = parsed.tasks;
+            rebuildUIFromState();
+        }
+    } catch (err) {
+        console.error("Failed to load state", err);
+    }
+}
+
 
 
 
@@ -282,7 +360,16 @@ function deleteProject() {
     updateTable(tasksDone, taskTableInTaskCompleatedPage);
     addProject.projectCount -= 1;
 
+    const options = document.querySelectorAll("option");
+
+    options.forEach((option) => {
+        if (option.textContent === projectTitle) {
+            option.remove();
+        }
+    })
+
     openPage(overallPage)
+    saveState();
 }
 
 
@@ -384,22 +471,31 @@ class addProject {                                              // add Project O
         taskCarousel.className = "task-title-carousel";
         taskContainer.appendChild(taskCarousel);
 
-        const tasks = this.projectTask;
+        const tasks = this.projectTask || [];
+        let activeTaskCount = 0;
+        tasks.forEach((task) => {
+            if (!task.done) {
+                activeTaskCount += 1;
+                const taskTitle = document.createElement("span");
+                taskTitle.textContent = task.taskTitle;
+                taskCarousel.appendChild(taskTitle);
+            }
+        });
+
         if (tasks.length === 0) {
             const taskTitle = document.createElement("span");
             taskTitle.textContent = "No Task For This Project";
             taskCarousel.appendChild(taskTitle);
+        } else if (activeTaskCount === 0) {
+            const taskTitle = document.createElement("span");
+            taskTitle.textContent = "No Active Task For This Project";
+            taskCarousel.appendChild(taskTitle);
+        } else {
+            // only add overlay when there are active items and overflow occurs later (kept simple here)
+            // const overlay = document.createElement("div");
+            // overlay.className = "overlay";
+            // taskCarousel.appendChild(overlay);
         }
-        tasks.forEach((task) => {
-            if (!task.done) {
-                const taskTitle = document.createElement("span");
-                taskTitle.textContent = task.taskTitle;
-                taskCarousel.appendChild(taskTitle);
-                const overlay = document.createElement("div");
-                overlay.className = "overlay";
-                taskCarousel.appendChild(overlay);
-            }
-        })
     }
 
     hideAddProjectBtnInOverallPage() {
@@ -423,41 +519,39 @@ function updateCard(project) {
     // const projectTasksSectionParent = document.querySelector(`#${projectCard.id} .project-card-content .div2 .tasks-carousel`);
     projectTasksSection.innerHTML = "";
     let taskCount = 0;
+    let totalTasksForProject = 0;
     tasks.forEach((task) => {
-            if (!task.done && task.relatedProject === project.projectTitle) {
-                taskCount += 1;
-                const taskTitle = document.createElement("span");
-                taskTitle.textContent = task.taskTitle;
-                projectTasksSection.appendChild(taskTitle);
-                // if(projectTasksSection.scrollWidth > projectTasksSection.parentElement.clientWidth) {
-                //     const overlay = document.createElement("div");
-                //     overlay.className = "overlay";
-                //     projectTasksSection.appendChild(overlay);
-                // }
-                
-            } 
-    })
-    requestAnimationFrame(() => {
-        const hasOverflow = projectTasksSection.scrollWidth > projectTasksSection.clientWidth;
-
-        // اگه اوورفلو داره و هنوز overlay نساختیم، بسازش
-        if (hasOverflow && !projectTasksSection.querySelector(".overlay")) {
-            const overlay = document.createElement("div");
-            overlay.className = "overlay";
-            projectTasksSection.appendChild(overlay);
+        if (task.relatedProject === project.projectTitle) {
+            totalTasksForProject += 1;
         }
-
-        // اگه دیگه اوورفلو نداره و overlay هست، پاکش کن
-        if (!hasOverflow) {
-            const overlay = projectTasksSection.querySelector(".overlay");
-            if (overlay) overlay.remove();
+        if (!task.done && task.relatedProject === project.projectTitle) {
+            taskCount += 1;
+            const taskTitle = document.createElement("span");
+            taskTitle.textContent = task.taskTitle;
+            projectTasksSection.appendChild(taskTitle);
         }
     })
+    // requestAnimationFrame(() => {
+    //     const hasOverflow = projectTasksSection.scrollWidth > projectTasksSection.clientWidth;
+
+       
+    //     if (taskCount > 0 && hasOverflow && !projectTasksSection.querySelector(".overlay")) {
+    //         const overlay = document.createElement("div");
+    //         overlay.className = "overlay";
+    //         projectTasksSection.appendChild(overlay);
+    //     }
+
+     
+    //     if (!hasOverflow || taskCount === 0) {
+    //         const overlay = projectTasksSection.querySelector(".overlay");
+    //         if (overlay) overlay.remove();
+    //     }
+    // })
 
     if(taskCount === 0) {
       projectTasksSection.innerHTML = "";
       const taskTitle = document.createElement("span");
-      taskTitle.textContent = "No Active Task For This Project";
+      taskTitle.textContent = totalTasksForProject === 0 ? "No Task For This Project" : "No Active Task For This Project";
       projectTasksSection.appendChild(taskTitle);
     }
 }
@@ -517,6 +611,7 @@ addProjectBtn.addEventListener("click", () => {
         })
         
         showMessage("Project Added Successfully ✅")
+        saveState();
         
     } else {
         showMessage("Please Fill All Inputs ")
@@ -581,6 +676,7 @@ addTaskBtn.addEventListener("click", () => {
         clearTableBody(taskTableInAllTaskPage);
         CreateTaskUi(tasks, taskTableInAllTaskPage);
         openPage(overallPage);
+        saveState();
     }
     else {
         showMessage("Please Fill All Inputs ")
@@ -838,6 +934,7 @@ document.addEventListener("click", (e) => {
             updateTable(relatedProject.projectTask, taskTableInProjectPage);
             updateTable(tasks, taskTableInAllTaskPage);
             updateTable(tasksDone, taskTableInTaskCompleatedPage);
+            saveState();
 
             // if (unfinishedTasks.length === 0) {
             //     createDemoMessageRow(taskTableInOverallPage);
@@ -858,11 +955,17 @@ document.addEventListener("click", (e) => {
 
 
 
-const animation = lottie.loadAnimation({
-    container: document.querySelector(".responcive-message-img"), // اون div بالا
-    renderer: 'svg',        // نوع رندر (svg یا canvas)
-    loop: false,             // تکرار
-    autoplay: true,         // خودکار پخش بشه
-    path: 'icons/Computer-Window-Animation.json', // مسیر فایل لوتی
+// load previous state on startup, then run lottie if present
+document.addEventListener("DOMContentLoaded", () => {
+    loadState();
+    if (window.lottie && document.querySelector(".responcive-message-img")) {
+        window.lottie.loadAnimation({
+            container: document.querySelector(".responcive-message_img"),
+            renderer: 'svg',
+            loop: false,
+            autoplay: true,
+            path: 'icons/Computer-Window-Animation.json',
+        });
+    }
 });
 

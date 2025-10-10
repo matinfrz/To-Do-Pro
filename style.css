@@ -176,7 +176,10 @@ body {
 .section-title img {
   width: 15px;
 }
-
+#all-task-page,
+#task-compleated-page {
+  padding-top: 65px !important;
+}
 .panel-page {
   height: 100%;
   width: 100%;
@@ -196,7 +199,7 @@ body {
 }
 .projects {
   width: 100%;
-  min-height: 170px;
+  min-height: 175px;
   padding: 0;
   display: flex;
   flex-direction: row;
@@ -359,7 +362,7 @@ h5 {
 }
 .project .project-des {
   font-size: 10px; /* اندازه فونت */
-  line-height: 12px; /* ارتفاع هر خط */
+  line-height: 15px; /* ارتفاع هر خط */
   margin: 0; /* حذف margin پیش‌فرض */
   padding: 0px 14px; /* بدون padding اضافی */
   color: var(--gray-2);
@@ -477,7 +480,7 @@ h5 {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
-  max-height: 200px;
+  /* max-height: 200px; */
   min-height: 50px;
 }
 .overflow-fix {
