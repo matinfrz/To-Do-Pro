@@ -854,3 +854,15 @@ document.addEventListener("click", (e) => {
         }
     }
 });
+
+
+
+
+const animation = lottie.loadAnimation({
+    container: document.querySelector(".responcive-message-img"), // اون div بالا
+    renderer: 'svg',        // نوع رندر (svg یا canvas)
+    loop: false,             // تکرار
+    autoplay: true,         // خودکار پخش بشه
+    path: 'icons/Computer-Window-Animation.json', // مسیر فایل لوتی
+});
+

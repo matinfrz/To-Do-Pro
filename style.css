@@ -1132,3 +1132,49 @@ textarea::-webkit-scrollbar-thumb:hover {
   transition: 0.1s;
   font-size: 12px;
 }
+
+/* responsive */
+
+@media (max-width: 900px) {
+  .responcive-message-img {
+    display: block !important;
+    width: 50%;
+  }
+  .responcive-message-text {
+    display: block !important;
+    color: var(--gray-2);
+    font-size: 14px;
+    text-align: center;
+    width: 60%;
+    font-weight: 400 !important;
+    line-height: 30px;
+    animation: fade 2s ease;
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+      margin-bottom: -100px;
+    }
+    to {
+      opacity: 1;
+      margin-bottom: 0;
+    }
+  }
+  body {
+    flex-direction: column;
+  }
+  .main-game {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .responcive-message-img {
+    display: block !important;
+    width: 80%;
+  }
+  .responcive-message-text {
+    width: 75%;
+    font-size: 14px;
+  }
+}
