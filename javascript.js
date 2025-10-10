@@ -420,23 +420,40 @@ class addProject {                                              // add Project O
 function updateCard(project) {
     const projectCard = document.getElementById(`${project.projectTitle.replace(/\s+/g, "-")}`);
     const projectTasksSection = document.querySelector(`#${projectCard.id} .project-card-content .div2 .tasks-carousel .task-title-carousel`);
+    // const projectTasksSectionParent = document.querySelector(`#${projectCard.id} .project-card-content .div2 .tasks-carousel`);
     projectTasksSection.innerHTML = "";
     let taskCount = 0;
     tasks.forEach((task) => {
             if (!task.done && task.relatedProject === project.projectTitle) {
                 taskCount += 1;
-                // projectTasksSection.innerHTML = "";
                 const taskTitle = document.createElement("span");
                 taskTitle.textContent = task.taskTitle;
                 projectTasksSection.appendChild(taskTitle);
-                if(taskCount === 2) {
-                    const overlay = document.createElement("div");
-                    overlay.className = "overlay";
-                    projectTasksSection.appendChild(overlay);
-                }
+                // if(projectTasksSection.scrollWidth > projectTasksSection.parentElement.clientWidth) {
+                //     const overlay = document.createElement("div");
+                //     overlay.className = "overlay";
+                //     projectTasksSection.appendChild(overlay);
+                // }
                 
             } 
     })
+    requestAnimationFrame(() => {
+        const hasOverflow = projectTasksSection.scrollWidth > projectTasksSection.clientWidth;
+
+        // اگه اوورفلو داره و هنوز overlay نساختیم، بسازش
+        if (hasOverflow && !projectTasksSection.querySelector(".overlay")) {
+            const overlay = document.createElement("div");
+            overlay.className = "overlay";
+            projectTasksSection.appendChild(overlay);
+        }
+
+        // اگه دیگه اوورفلو نداره و overlay هست، پاکش کن
+        if (!hasOverflow) {
+            const overlay = projectTasksSection.querySelector(".overlay");
+            if (overlay) overlay.remove();
+        }
+    })
+
     if(taskCount === 0) {
       projectTasksSection.innerHTML = "";
       const taskTitle = document.createElement("span");
